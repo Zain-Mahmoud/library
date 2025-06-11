@@ -4,9 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library</title>
-    <script src="bookkeeping.js"></script>
+    <style>
+        #container {
+            display: flex;
+            flex-direction: column;
+        }
+        .book {
+            display: flex;
+            flex-direction: row;
+        }
+
+        tr, td, th {
+            border: solid black 1px;
+
+        }
+    </style>
 </head>
 <body>
     <h3>Library</h3>
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Page count</th>
+                <th>Read</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
 </body>
+<script src="bookkeeping.js"></script>
 </html>
