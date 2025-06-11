@@ -35,4 +35,13 @@ function displayBooks(booksList){
     }
 }
 
-document.addEventListener('DOMContentLoaded', displayBooks(books))
+document.addEventListener('DOMContentLoaded', () => {
+    displayBooks(books);
+    document.querySelector('#newbook').onclick = () => {
+        document.querySelector('#form').show()
+
+    }
+    document.querySelector('#cancel').onclick = ()=>{
+        document.querySelector('#form').close()
+    }
+})
