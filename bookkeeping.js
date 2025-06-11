@@ -13,6 +13,7 @@ function addBookToLibrary(book){
 }
 
 function displayBooks(booksList){
+    document.querySelector('tbody').innerHTML = ''
     for (let i = 0; i<booksList.length; i++){
         let title = document.createElement('td')
         let author = document.createElement('td')
@@ -43,5 +44,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     document.querySelector('#cancel').onclick = ()=>{
         document.querySelector('#form').close()
+    }
+    document.querySelector('form').onsubmit = (event)=>{
+        event.preventDefault()
+        let title = document.querySelector('#title').value
+        let author = document.querySelector('#author').value
+        let pages = document.querySelector('#pages').value
+        let read = document.querySelector('#read').checked
+        let book = new Books(title, author, pages, read)
+        addBookToLibrary(book)
+        document.querySelector('#form').close()
+        displayBooks(books)
     }
 })
