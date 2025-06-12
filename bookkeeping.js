@@ -7,6 +7,15 @@ function Books(title, author, pages, read){
     this.read = read
 }
 
+Books.prototype.toggleRead = function () {
+        if (this.read === true){
+            this.read = false;
+        } else{
+            this.read = true;
+        }
+    }
+
+
 
 function addBookToLibrary(book){
     books.push(book)
@@ -20,23 +29,45 @@ function displayBooks(booksList){
         let pages = document.createElement('td')
         let read = document.createElement('td')
         let del = document.createElement('td')
+        let readrow = document.createElement('td')
         let button = document.createElement('button')
+        let toggleread = document.createElement('button')
         del.classList = 'delete'
         button.dataset.book = booksList[i].id
         button.classList = 'delbutton'
         button.innerHTML = 'Delete'
+        readrow.classList = 'read'
         button.onclick = ()=> {
             const bookid = button.dataset.book
             for (let i = 0; i< books.length; i++){
                 console.log(`${books[i].id}`)
-                console.log(bookid)
                 if (`${books[i].id}` === bookid){
                     books.splice(i, 1);
+                    break
                 }
             }
             displayBooks(books);
         }
-        del.appendChild(button)
+        del.appendChild(button);
+
+        if (booksList[i].read){
+            toggleread.innerHTML = `Unread`;
+        } else {
+            toggleread.innerHTML = 'Read';
+        }
+
+        toggleread.dataset.book = booksList[i].id;
+        toggleread.onclick = () => {
+            const bookid = toggleread.dataset.book
+            for (let i = 0; i<books.length; i++){
+                if (`${books[i].id}` === bookid){
+                    books[i].toggleRead();
+                    break
+                }
+            }
+            displayBooks(books);
+        }
+        readrow.appendChild(toggleread);
         if (booksList[i].read){
             read.innerHTML = `Read`
         } else {
@@ -51,6 +82,7 @@ function displayBooks(booksList){
         tr.appendChild(pages)
         tr.appendChild(read)
         tr.appendChild(del)
+        tr.append(readrow)
         document.querySelector('tbody').appendChild(tr)
     }
 }
