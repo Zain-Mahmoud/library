@@ -19,6 +19,24 @@ function displayBooks(booksList){
         let author = document.createElement('td')
         let pages = document.createElement('td')
         let read = document.createElement('td')
+        let del = document.createElement('td')
+        let button = document.createElement('button')
+        del.classList = 'delete'
+        button.dataset.book = booksList[i].id
+        button.classList = 'delbutton'
+        button.innerHTML = 'Delete'
+        button.onclick = ()=> {
+            const bookid = button.dataset.book
+            for (let i = 0; i< books.length; i++){
+                console.log(`${books[i].id}`)
+                console.log(bookid)
+                if (`${books[i].id}` === bookid){
+                    books.splice(i, 1);
+                }
+            }
+            displayBooks(books);
+        }
+        del.appendChild(button)
         if (booksList[i].read){
             read.innerHTML = `Read`
         } else {
@@ -32,6 +50,7 @@ function displayBooks(booksList){
         tr.appendChild(author)
         tr.appendChild(pages)
         tr.appendChild(read)
+        tr.appendChild(del)
         document.querySelector('tbody').appendChild(tr)
     }
 }
@@ -56,4 +75,5 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#form').close()
         displayBooks(books)
     }
+
 })
